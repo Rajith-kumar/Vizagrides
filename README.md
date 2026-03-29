@@ -195,7 +195,7 @@ Example:
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage](static/images/homepage.png)
+![Homepage](C:\Users\rajit\OneDrive\Pictures\Screenshots\signup.png)
 
 ### Signup/Login
 ![Signup/Login](static/images/login.png)
