@@ -251,7 +251,7 @@ This project is for **learning and educational purposes**.
 
 **Rajith Kumar**
 
-- GitHub: [your-github-username](https://github.com/your-github-username)
+- GitHub: [your-github-username](https://github.com/Rajith-kumar)
 
 ---
 
