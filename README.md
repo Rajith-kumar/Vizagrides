@@ -197,7 +197,7 @@ http://127.0.0.1:5000/
 ### Signup
 <img width="1920" height="1080" alt="signup" src="https://github.com/user-attachments/assets/a909e153-e11a-43a9-a592-2375e7dbf3d6" />
 
-```
+
 
 ---
 
