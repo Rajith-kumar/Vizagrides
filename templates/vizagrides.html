@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Car Booking website</title>
+            <!-- <link rel="stylesheet" href="homepage.css"> -->
+            <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}">
+            
+            <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
+
+</head>
+<body>
+  <div class="whole">
+  <nav class="navbar">
+    <div class="logo">Guru Travels</div>
+    <div class="menu-toggle" id="mobile-menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>&#9776;
+    </div>
+    <ul id="nav-menu" class="nav-links">
+      <li><a href="#home-section">Home</a></li>
+      <li><a href="#cars">Cars</a></li>
+      <li><a href="#Why-choose-us">Why Choose Us</a></li>
+      <li><a href="#inline-booking-form">Book Now</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li id="auth-buttons" class = "nav-buttons">
+        <button onclick="openLogin();closeMenu();">Login</button>
+        <button onclick="openSignup();closeMenu();">Sign Up</button>
+      </li>
+
+      <!-- <li id="welcome-container">
+        <div class="welcome-box">
+          <span id="welcome-msg"></span>
+          <button onclick="logout()" id="logout-btn" style="display:none;">Logout</button>
+        </div>
+      </li> -->
+      <li>
+        <button onclick="logout()" id="logout-btn" style="display:none;">Logout</button>
+      </li>
+    </ul>
+    
+  </nav>
+
+<!-- popup login form -->
+
+<div id="login-form-popup" class="booking-popup">
+  <!-- <span class="close-btn" onclick="openLogin()">&times;</span> -->
+  <span class="close-btn" onclick="closeloginfrom()">&times;</span>
+  <div class="neumorphic neumorphic-card">
+    <h1 style="align-self: center;">Login</h1>
+      <form id = "loginForm">
+        <!-- <p id="login-msg" style="color: rgb(241, 235, 235);"></p> -->
+        <label class="form-label">Email:</label>
+        <input id="login-username" name = "email" type="text" class="neumorphic neumorphic-inset" placeholder="Enter your email" required>
+
+        <label class="form-label">Password:</label>
+        <input id="login-password" name = "password" type="text"  class="neumorphic neumorphic-inset" placeholder="Enter your password" required>
+
+        <div class="button-row">
+          <button class="neumorphic neumorphic-button" type="button" onclick="closeloginfrom()">Close</button>
+          <!-- <button class="neumorphic neumorphic-button" type="button" onclick="Login()">Login</button> -->
+           <button class="neumorphic neumorphic-button" type="button" onclick="Login()">Login</button>
+          
+    </div>
+  </form>
+  </div>
+</div>
+
+
+<!-- SIGNUP MODAL -->
+
+<div id="signup-form-popup" class="booking-popup">
+  <!-- <span class="close-btn" onclick="openLogin()">&times;</span> -->
+  <span class="close-btn" onclick="closesignupfrom()">&times;</span>
+  <div class="neumorphic neumorphic-card">
+    <h1 style="align-self: center;">Sign Up</h1>
+      <form id = "signupForm">
+        <label class="form-label">UserName:</label>
+        <input id="signup-username" type="text" name="username" class="neumorphic neumorphic-inset" placeholder="Enter your UserName" required>
+
+        <label class="form-label">Password:</label>
+        <input id="signup-password" type="text" name="password" class="neumorphic neumorphic-inset" placeholder="Enter your password" required>
+
+        <label class="form-label">Mobile Number:</label>
+        <input id="signup-phone"  name="phone" type="text" class="neumorphic neumorphic-inset" placeholder="Enter your Phone No" required>
+
+        <label class="form-label">Email:</label>
+        <input id="signup-email"   name="email"type="text" class="neumorphic neumorphic-inset" placeholder="Enter your Email" required>
+
+        <div class="button-row">
+          <button class="neumorphic neumorphic-button" type="button" onclick="closesignupfrom()">Close</button>
+          <!-- <button class="neumorphic neumorphic-button" type="button" onclick="Signup()">Login</button> -->
+          <button class="neumorphic neumorphic-button" type="button" onclick = "Signup()">Sign Up</button>
+        </div>
+    </form>
+  </div>
+</div>
+   <!-- ✅ NEW WELCOME TEXT -->
+  <div class="hero-welcome" id="hero-welcome">
+    Welcome <span id="hero-username"></span><br>
+    
+  </div>
+  <!-- main Section (welcome message) -->
+<div class="background-video-wrapper" id="home-section">
+  <video autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='images/vizag rides lappie video.mp4') }}">
+    Your browser does not support the video tag.
+  </video>
+
+  <img class="gif-overlay" src="{{ url_for('static', filename='images/logo gif.gif')}}" alt="GIF Overlay">
+</div>
+
+  <!-- Just the inside part, no full HTML tags -->
+<div class="car-slider whole">
+  <div class="car-slider-container ">
+    <h2 class="car-slider-head">Our Cars</h2>
+    <img id="car-slider-image" src="https://via.placeholder.com/600x300?text=Car+1" alt="Car Image" />
+    <button id="car-prev-btn" class="car-slider-btn left">&#10094;</button>
+    <button id="car-next-btn" class="car-slider-btn right">&#10095;</button>
+  </div>
+</div>
+  
+<!-- Details form (always visible)-->
+<div id="inline-booking-form" class="neumorphic neumorphic-card">
+  <h1 style="align-self: center;margin-bottom: 10px;">Book Your Ride</h1>
+
+  <label class="form-label">Name:</label>
+  <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter your Name" required>
+
+  <label class="form-label">Mobile Number:</label>
+  <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter your Phone No" required>
+
+  <label class="form-label">Starting Point:</label>
+  <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter Starting point" required>
+
+  <label class="form-label">Destination:</label>
+  <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter Destination" required>
+
+  <label class="form-label">Number of Persons:</label>
+  <input type="number" class="neumorphic neumorphic-inset" placeholder="No. of Persons" required>
+
+  <label class="form-label">Message:</label>
+  <textarea class="neumorphic neumorphic-inset" rows="4" placeholder="Message (OPTIONAL)"></textarea>
+
+  <button class="neumorphic neumorphic-button" type="button" onclick="sendWhatsAppMessage()">Send</button>
+</div>
+
+
+
+<!-- Popup Booking Form -->
+<div id="booking-form-popup" class="booking-popup">
+  <span class="close-btn" onclick="closeBookingForm()">&times;</span>
+  <div class="neumorphic neumorphic-card">
+    <h1 style="align-self: center;">Book Now</h1>
+
+    <label class="form-label">Name:</label>
+    <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter your Name" required>
+
+    <label class="form-label">Mobile Number:</label>
+    <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter your Phone No" required>
+
+    <label class="form-label">Starting Point:</label>
+    <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter Starting point" required>
+
+    <label class="form-label">Destination:</label>
+    <input type="text" class="neumorphic neumorphic-inset" placeholder="Enter Destination" required>
+
+    <label class="form-label">Number of Persons:</label>
+    <input type="number" class="neumorphic neumorphic-inset" placeholder="No. of Persons" required>
+
+    <label class="form-label">Message:</label>
+    <textarea class="neumorphic neumorphic-inset" rows="4" placeholder="Message (OPTIONAL)"></textarea>
+
+    <div class="button-row">
+      <button class="neumorphic neumorphic-button" type="button" onclick="closeBookingForm()">Close</button>
+      <button class="neumorphic neumorphic-button" type="button" onclick="sendWhatsAppMessagefrompopup()">Send</button>
+    </div>
+  </div>
+</div>
+
+<!--the cars will be shown into differnt cards-->
+
+<section class="fleet-section" id="cars">
+  <h2 class="fleet-main-head">Our Fleet</h2>
+
+  <div class="fleet-grid">
+    
+    <div class="fleet-card">
+      <img src="images/swiftdzire.png" alt="Swift Dzire">
+      <div class="fleet-text-content">
+        <h3 class="fleet-head">Swift Dzire</h3>
+        <p class="fleet-para">Base Rate(10hr) : ₹3000</p>
+        <p class="fleet-para">Extra Charge per KM : ₹14</p>
+        <p class="fleet-para">Passengers : 4</p>
+        <button class="book-btn" onclick="openBookingForm()">Book Now</button>
+      </div>
+    </div>
+
+    <div class="fleet-card">
+      <img src="images/ertiga.jpg" alt="Ertiga">
+      <div class="fleet-text-content">
+        <h3 class="fleet-head">Ertiga</h3>
+        <p class="fleet-para">Base Rate(10hr) : ₹3500</p>
+        <p class="fleet-para">Extra Charge per KM : ₹17</p>
+        <p class="fleet-para">Passengers : 6</p>
+        <button class="book-btn" onclick="openBookingForm()">Book Now</button>
+      </div>
+    </div>
+
+    <div class="fleet-card">
+      <img src="images/hondaamazeu.jpg" alt="Honda Amaze">
+      <div class="fleet-text-content">
+        <h3 class="fleet-head">Honda Amaze</h3>
+        <p class="fleet-para">Base Rate(10hr) : ₹3000</p>
+        <p class="fleet-para">Extra Charge per KM : ₹14</p>
+        <p class="fleet-para">Passengers : 4</p>
+        <button class="book-btn" onclick="openBookingForm()">Book Now</button>
+      </div>
+    </div>
+
+    <div class="fleet-card">
+      <img src="images/innovacrysta.jpg" alt="Innova Crysta">
+      <div class="fleet-text-content">
+        <h3 class="fleet-head">Innova Crysta</h3>
+        <p class="fleet-para">Base Rate(10hr) : ₹4000</p>
+        <p class="fleet-para">Extra Charge per KM : ₹20</p>
+        <p class="fleet-para">Passengers : 6</p>
+        <button class="book-btn" onclick="openBookingForm()">Book Now</button>
+      </div>
+    </div>
+
+    <div class="fleet-card">
+      <img src="images/toyotoetios.avif" alt="Toyoto Etios">
+      <div class="fleet-text-content">
+        <h3 class="fleet-head">Toyoto Etios</h3>
+        <p class="fleet-para">Base Rate(10hr) : ₹2500</p>
+        <p class="fleet-para">Extra Charge per KM : ₹14</p>
+        <p class="fleet-para">Passengers : 4</p>
+        <button class="book-btn" onclick="openBookingForm()">Book Now</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!--why choose us section-->
+<section class="why-choose-us"id="Why-choose-us">
+  <h2>Why Choose Us</h2>
+  <div class="features">
+    <div class="feature-box">
+      <img class="feature-img" src="images/firsticon.png" alt="Feature 1">
+      <p class="feature-text" >We are a passionate travel & tour service community, offering a wide range of services including car, sightseeing, and tour programs. This marks the beginning of my journey.</p>
+    </div>
+    <div class="feature-box">
+      <img class="feature-img" src="images/secondicon.png" alt="Feature 2">
+      <p class="feature-text">We focus on providing vehicles with experienced and well groomed drivers strictly trained to follow the safety norms, They can also be helpful in providing basic information as guides to.</p>
+    </div>
+    <div class="feature-box">
+      <img class="feature-img" src="images/thirdicon.jpg" alt="Feature 3">
+      <p class="feature-text">We are proud to offer excellent quality and value for money in our tours, which give you the chance to experience your chosen destination in an authentic and exciting way</p>
+    </div>
+  </div>
+</section>
+
+
+<!--popup for enquiry now section-->
+
+<div id="enquiryPopup" class="booking-popup enquiry-popup">
+  <span class="close-btn enquiry-close-btn" onclick="closeEnquiryForm()">&times;</span>
+
+  <div class="neumorphic neumorphic-card enquiry-card">
+    <h2 style="align-self: center;" class="enquiry-heading">Send an Enquiry</h2>
+
+    <label class="form-label enquiry-label">Name:</label>
+    <input type="text" class="neumorphic neumorphic-input enquiry-input" placeholder="Enter your Name" required>
+
+    <label class="form-label enquiry-label">Phone Number:</label>
+    <input type="text" class="neumorphic neumorphic-input enquiry-input" placeholder="Enter your Phone No" required>
+
+    <div class="button-row enquiry-buttons">
+      <button class="neumorphic neumorphic-button-enquiry " type="button" onclick="closeEnquiryForm()">Close</button>
+      <button class="neumorphic neumorphic-button-enquiry " type="button" onclick="sendToWhatsApp()">Send</button>
+    </div>
+  </div>
+</div>
+
+<!--out station cabs-->
+<div class="outstation">
+      <div class="outstation-left">
+        <img src="images/taxi.png" alt="taxi" class="outstation-img">
+      </div>
+      <div class="outstation-right">
+  <h2 class="title-package outstation-text">Outstanding Cab Services</h2>
+  <p class="places-package outstation-text">Reliable, comfortable, and on-time rides to any city in India. Book your intercity cab now!</p>
+
+  <!-- ⬇️ Insert dropdowns here -->
+  <!-- dropdowns start -->
+   <div class="outstation-form-cont">
+    <div class="outstation-form-cont-start">
+      <label for="start-point" class="start-list-label">Starting Point : </label>
+      <input list="locations" id="start-point" class="start-list-input" placeholder="Enter Starting Point">
+    </div>
+    <div class="outstation-form-cont-start outstation-form-cont-desti">
+      <label for="end-point" class="start-list-label">Destination  : </label>
+      <input list="locations" id="end-point" class="start-list-input end-list-input" placeholder="Enter Destination">
+    </div>
+ 
+
+    <datalist id="locations">
+      <option value="Bangalore">
+      <option value="Chennai">
+      <option value="Hyderabad">
+      <option value="Ichapuram">
+      <option value="Kakinada">
+      <option value="Odissa">
+      <option value="Parvathipuram">
+      <option value="Raigada">
+      <option value="Rajamandry">
+      <option value="Srikakulam">
+      <option value="Vijayawada">
+      <option value="Vishakapatnam">
+      <option value="Vizianagaram">
+    </datalist>
+    <!-- dropdowns end -->
+    <div>
+      <button class="enquiry-package-button" onclick="openEnquiryForm(this)">Enquiry Now</button> 
+    </div>
+ </div>
+</div>
+
+</div>
+
+<div class="slider-package-container" id="packages">
+  <button class="nav-package-btn left-package-btn" onclick="prevPackageSlide()">&#10094;</button>
+
+  <div class="wrapper-package" id="wrapperPackage">
+    <!-- Slide 1 -->
+    <div class="slide-package">
+      <div class="left-package">
+        <img src="images/arukuvalley.jpg" alt="Aruku Valley Tour" class="img-package">
+      </div>
+      <div class="right-package">
+        <h2 class="title-package">Aruku Valley Tour</h2>
+        <p class="places-package">(Damaku View Point, Borra Caves, Katika Waterfalls, Galikonda View Point, Coffee Garden, Tribal/Coffee Museum, Padmavathi Garden)</p>
+        <p class="price-package">Starting Price @ Rs. 4,000/- (Including Cab, Tollgate, Parking, Hill charge, Driver Charges)</p>
+        <p class="note-package">Note: Hotel Charges Extra</p>
+        <button class="enquiry-package-button" onclick="openEnquiryForm(this)">Enquiry Now</button>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide-package">
+      <div class="left-package">
+        <img src="images/lambasingi.webp" alt="Lambasingi Tour Package" class="img-package">
+      </div>
+      <div class="right-package">
+        <h2 class="title-package">Lambasingi Tour Package</h2>
+        <p class="places-package">(Lambasingi Viewpoint, Strawberry gardens, Kothapalli Waterfall, Paderu Ammavari temple, and Many More)</p>
+        <p class="price-package">Starting Price @ Rs. 4,000/- (Including Cab, Tollgate, Parking, Hill charge, Driver Charges)</p>
+        <p class="note-package">Note: Hotel Charges Extra</p>
+        <button class="enquiry-package-button" onclick="openEnquiryForm(this)">Enquiry Now</button>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide-package">
+      <div class="left-package">
+        <img src="images/vanajangi-update.jpg" alt="Vanajangi Tour Package" class="img-package">
+      </div>
+      <div class="right-package">
+        <h2 class="title-package">Vanajangi Tour Package</h2>
+        <p class="places-package">(Vanajangi Viewpoint, Paderu Ammavari,Modhakondamma padhalu and many more)</p>
+        <p class="price-package">Starting Price @ Rs. 4,000/- (Including Cab, Tollgate, Parking, Hill charge, Driver Charges)</p>
+        <p class="note-package">Note: Hotel Charges Extra</p>
+        <button class="enquiry-package-button" onclick="openEnquiryForm(this)">Enquiry Now</button>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide-package">
+      <div class="left-package">
+        <img src="images/vsptempletour-update.jpg" alt="Visakhapatnam Temple Tour Packages" class="img-package">
+      </div>
+      <div class="right-package">
+        <h2 class="title-package">Visakhapatnam Temple Tour Packages</h2>
+        <p class="places-package">(Simhachalam, Arasavalli, Srikurmam, Sree Mukha Lingam, Ramabanam,Sri kanaka mahalakshmi Temple)</p>
+        <p class="price-package">Starting Price @ Rs. 2,999/- (Including Cab, Tollgate, Parking, Hill charge, Driver Charges)</p>
+        <p class="note-package">Note: Hotel Charges Extra</p>
+        <button class="enquiry-package-button" onclick="openEnquiryForm(this)">Enquiry Now</button>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide-package">
+      <div class="left-package">
+        <img src="images/vspsightseeing.jpg" alt="Visakhapatnam City Sightseeing Tour Package" class="img-package">
+      </div>
+      <div class="right-package">
+        <h2 class="title-package">Visakhapatnam City Sightseeing Tour Package</h2>
+        <p class="places-package">(RK/Ramakrishna Beach,Rushikonda Beach, Thotlakonda Beach, Ramanaidu Studio, Bhimili Beach, Kailash Giri, Tenatti Park, Visakha/Submarine Museum, Simhachalam Temple)        </p>
+        <p class="price-package">Starting Price @ Rs. 4,000/- (Including Cab, Tollgate, Parking, Hill charge, Driver Charges)</p>
+        <p class="note-package">Note: Hotel Charges Extra</p>
+        <button class="enquiry-package-button" onclick="openEnquiryForm(this)">Enquiry Now</button>
+      </div>
+    </div>
+
+    <!-- Slide 1 -->
+    <div class="slide-package">
+      <div class="left-package">
+        <img src="images/customtours-update.jpg" alt="Aruku Valley Tour" class="img-package">
+      </div>
+      <div class="right-package">
+        <h2 class="title-package">Custom Package as per your preference</h2>
+        <p class="places-package">Available for 1, 2, 3, 4, 5, 6, 7, or 8-day trips</p>
+        <p class="price-package">Pocket-Friendly Rates</p>
+        <p class="note-package">Note: Hotel Charges Extra</p>
+        <button class="enquiry-package-button" onclick="openEnquiryForm(this)">Enquiry Now</button>
+      </div>
+    </div>
+
+
+  </div>
+
+  <button class="nav-package-btn right-package-btn" onclick="nextPackageSlide()">&#10095;</button>
+</div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer" id="contact">
+  <div class="social-icons">
+    <a href="#" aria-label="Instagram"><i class="fab fa-instagram icon"></i></a>
+    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp icon"></i></a>
+    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f icon"></i></a>
+    <a href="mailto:example@example.com" aria-label="Email"><i class="fas fa-envelope icon"></i></a>
+  </div>
+  <p class="copyright">© 2025 Vizag Rides. All rights reserved.</p>
+  <p class="dev-credit">
+    Developed by <a href="https://www.instagram.com/satish_jrs/" target="_blank"><span style="color: rgba(255, 217, 0, 0.929);">Satish</span></a>
+  </p>
+</footer>
+
+<script src="{{ url_for('static', filename='homepage.js') }}"></script>
+<!-- <script src="homepage.js"></script> -->
+</body>
