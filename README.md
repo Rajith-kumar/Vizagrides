@@ -187,13 +187,6 @@ http://127.0.0.1:5000/
 
 ## 📸 Screenshots
 
-You can add screenshots here after uploading images to your GitHub repo.
-
-Example:
-
-```md
-## 📸 Screenshots
-
 ### Homepage
 <img width="1920" height="1080" alt="homepage" src="https://github.com/user-attachments/assets/539b455b-c995-4094-8032-96221e93b53d" />
 
