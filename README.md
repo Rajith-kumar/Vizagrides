@@ -184,6 +184,95 @@ http://127.0.0.1:5000/
 - If valid, user is logged in successfully.
 
 ---
+## 🗄️ Database Setup (MySQL)
+
+This project uses **MySQL** to store user data securely.
+
+### 📌 Step 1: Create Database
+
+Open MySQL Workbench or terminal and run:
+
+```sql
+CREATE DATABASE car_booking;
+```
+
+---
+
+### 📌 Step 2: Use Database
+
+```sql
+USE car_booking;
+```
+
+---
+
+### 📌 Step 3: Create Users Table
+
+```sql
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+```
+
+---
+
+### 📌 Step 4: Insert Sample Data (Optional)
+
+```sql
+INSERT INTO users (name, phone, email, password)
+VALUES (
+    'testuser',
+    '9059697091',
+    'test@example.com',
+    'hashed_password_here'
+);
+```
+
+> ⚠️ Note: Passwords are stored in **hashed format**, not plain text.
+
+---
+
+### 📌 Step 5: Verify Data
+
+```sql
+SELECT * FROM users;
+```
+
+---
+
+## 🔐 Important Notes
+
+- Passwords are hashed using:
+  ```python
+  generate_password_hash()
+  ```
+- Never store plain text passwords.
+- Make sure your MySQL server is running before starting the Flask app.
+
+---
+
+## ⚙️ MySQL Configuration in Flask
+
+Update your `app.py`:
+
+```python
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'your_mysql_password'
+app.config['MYSQL_DB'] = 'car_booking'
+```
+
+---
+
+## 🧪 Tested With
+
+- MySQL Workbench
+- Local MySQL Server (MySQL 8.0+)
+
 
 ## 📸 Screenshots
 
