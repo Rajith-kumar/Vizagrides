@@ -195,10 +195,15 @@ Example:
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage](C:\Users\rajit\OneDrive\Pictures\Screenshots\signup.png)
+<img width="1920" height="1080" alt="homepage" src="https://github.com/user-attachments/assets/539b455b-c995-4094-8032-96221e93b53d" />
 
-### Signup/Login
-![Signup/Login](static/images/login.png)
+
+### Login
+<img width="1920" height="1080" alt="login" src="https://github.com/user-attachments/assets/a716ab4b-7e64-4841-8f10-9ac4b5cfd1d0" />
+
+### Signup
+<img width="1920" height="1080" alt="signup" src="https://github.com/user-attachments/assets/a909e153-e11a-43a9-a592-2375e7dbf3d6" />
+
 ```
 
 ---
