@@ -273,6 +273,12 @@ app.config['MYSQL_DB'] = 'car_booking'
 - MySQL Workbench
 - Local MySQL Server (MySQL 8.0+)
 
+## 📸 Database Preview
+
+Below is a sample view of the `users` table in MySQL:
+
+<img width="1920" height="1080" alt="Screenshot (1010)" src="https://github.com/user-attachments/assets/fd0ee684-e734-48b3-8a2a-1e3d482084e3" />
+
 
 ## 📸 Screenshots
 
